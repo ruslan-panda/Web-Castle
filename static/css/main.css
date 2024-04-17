@@ -21,7 +21,10 @@ a {
     text-decoration: none;
     color: #343F52;
 }
-
+.buttons {
+    display:flex;
+    gap: 30px;
+}
 .titles li {
     text-decoration: none;
     display: inline;
@@ -30,8 +33,16 @@ a {
     font-weight: 600;
     font-style: normal;
     color: #343F52;
+    transition: all .19s ease-in;
 }
 
+.titles li a {
+    transition: all .19s ease-in;
+}
+
+.titles li a:hover {
+    color: #605DBA;
+}
 .titles {
     display: flex;
     justify-content: space-between;
