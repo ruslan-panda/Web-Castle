@@ -4,6 +4,7 @@ from flask_restful import Api
 from data import db_session
 from forms.register import RegisterForm
 from data.user import User
+from forms.user import LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -49,8 +50,21 @@ def form_sample():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        return redirect()
+        return redirect("/index")
     return render_template('registr.html', title='Регистрация', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            return redirect("/index")
+        return render_template('login.html', message="Неправильный логин или пароль", form=form)
+    return render_template('login.html', title='Авторизация', form=form)
 
 
 # http://127.0.0.1:8080//sample_file_upload
