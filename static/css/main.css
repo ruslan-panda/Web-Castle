@@ -33,8 +33,16 @@ a {
     font-weight: 600;
     font-style: normal;
     color: #343F52;
+    transition: all .19s ease-in;
 }
 
+.titles li a {
+    transition: all .19s ease-in;
+}
+
+.titles li a:hover {
+    color: #605DBA;
+}
 .titles {
     display: flex;
     justify-content: space-between;
