@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
+print(1)
 @app.route('/')
 def i():
     return ""
