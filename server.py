@@ -3,7 +3,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from flask_restful import Api
 from data import db_session
 from forms.register import RegisterForm
-from data.user import User
+from data.users import User
 from forms.user import LoginForm
 
 app = Flask(__name__)
@@ -12,7 +12,6 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-print(1)
 @app.route('/')
 def i():
     return ""
