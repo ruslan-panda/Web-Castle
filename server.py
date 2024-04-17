@@ -13,8 +13,7 @@ login_manager.init_app(app)
 
 
 @app.route('/')
-@app.route('/index')
-def index():
+def i():
     return ""
 
 @app.route('/logout')
@@ -56,4 +55,5 @@ def form_sample():
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
+    db_session.global_init("db/jobs.db")
     app.run(port=8080, host='127.0.0.1')
