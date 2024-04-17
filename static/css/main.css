@@ -21,7 +21,10 @@ a {
     text-decoration: none;
     color: #343F52;
 }
-
+.buttons {
+    display:flex;
+    gap: 30px;
+}
 .titles li {
     text-decoration: none;
     display: inline;
