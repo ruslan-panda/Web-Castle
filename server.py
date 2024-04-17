@@ -28,6 +28,9 @@ def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
 
 @app.route('/form_sample', methods=['GET', 'POST'])
 def form_sample():
@@ -47,7 +50,7 @@ def form_sample():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-
+        return redirect()
     return render_template('registr.html', title='Регистрация', form=form)
 
 
