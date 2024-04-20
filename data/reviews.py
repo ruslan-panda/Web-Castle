@@ -11,7 +11,7 @@ class Review(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'review'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    text = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    grabe = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    text = sqlalchemy.Column(sqlalchemy.String, nullable=True, default="")
+    grade = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     order_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("order.id"))
     order = orm.relationship('Order')

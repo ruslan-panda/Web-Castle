@@ -5,7 +5,7 @@
     <p>
         {{ form.text.label }}<br>
         {{ form.text(class="form-control") }}<br>
-        {% for error in form.name_order.errors %}
+        {% for error in form.text.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
@@ -14,7 +14,7 @@
     <p>
         {{ form.grade.label }}<br>
         {{ form.grade(class="form-control") }}<br>
-        {% for error in form.text.errors %}
+        {% for error in form.grade.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>

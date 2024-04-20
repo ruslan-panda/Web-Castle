@@ -8,6 +8,7 @@ from forms.user_from import LoginForm
 from forms.order_form import OrderForm
 from forms.review_form import ReviewForm
 from data.orders import Order
+from data.reviews import Review
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -73,13 +74,13 @@ def order():
     form = OrderForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        user = Order(
+        order = Order(
             name_order=form.name_order.data,
             text=form.text.data,
             teg=form.teg.data,
             user_id=current_user.id
         )
-        db_sess.add(user)
+        db_sess.add(order)
         db_sess.commit()
         return redirect("/index")
     return render_template('order.html', title='формление заказа', form=form)
@@ -88,6 +89,14 @@ def order():
 @app.route('/review', methods=['GET', 'POST'])
 def review():
     form = ReviewForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        review = Review(
+            text=form.text.data,
+            grade=form.grade.data,
+        )
+        db_sess.add(review)
+        db_sess.commit()
     return render_template("review.html", title="", form=form)
 
 # http://127.0.0.1:8080//sample_file_upload
