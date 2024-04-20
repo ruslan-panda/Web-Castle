@@ -17,10 +17,14 @@
         <li><a href="#">Статистика</a></li>
         <li><a href="#">Заказать</a></li>
     </ul>
+    {% if current_user.is_authenticated %}
+                    <a class="navbar-brand" href="/logout">{{ current_user.login }}</a>
+                {% else %}
     <div class="buttons">
         <a class="login-button" href="/login">Вход</a>
         <a class="register-button" href="/form_sample">Регистрация</a>
     </div>
+    {% endif %}
 </div>
 <div class="intro">
     <div class="container s">

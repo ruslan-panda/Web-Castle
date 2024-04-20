@@ -3,8 +3,8 @@
 <form action="" method="post">
     {{ form.csrf_token }}
     <p>
-        {{ form.name_order.label }}<br>
-        {{ form.name_order(class="form-control") }}<br>
+        {{ form.text.label }}<br>
+        {{ form.text(class="form-control") }}<br>
         {% for error in form.name_order.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
@@ -12,24 +12,15 @@
         {% endfor %}
     </p>
     <p>
-        {{ form.text.label }}<br>
-        {{ form.text(class="form-control") }}<br>
+        {{ form.grade.label }}<br>
+        {{ form.grade(class="form-control") }}<br>
         {% for error in form.text.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
-    <p>
-        {{ form.teg.label }}<br>
-        {{ form.teg(class="form-control") }}<br>
-        {% for error in form.teg.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>{{ form.post_order(type="submit", class="btn btn-primary") }}</p>
+    <p>{{ form.post_review(type="submit", class="btn btn-primary") }}</p>
     <div>{{ message }}</div>
 </form>
 {% endblock %}
