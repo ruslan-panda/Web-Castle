@@ -2,7 +2,7 @@
 <link href="static/css/main.css" rel="stylesheet" type="text/css"/>
 <link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
 <title>Вход</title>
-    <div class="window">
+    <div class="window two">
     <h1 class="name-func">Авторизация</h1>
         <form action="" method="post">
             {{ form.hidden_tag() }}
@@ -26,7 +26,7 @@
             {% endfor %}
             </p>
             <p class="check">{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-            <p class="">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+            <p class="submit-button">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
             <div>{{ message }}</div>
         </form>
         {% endblock %}

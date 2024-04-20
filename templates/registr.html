@@ -2,7 +2,7 @@
 <link href="static/css/main.css" rel="stylesheet" type="text/css"/>
 <link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
 <title>Регистрация</title>
-<div class="window">
+<div class="window one">
     <h1>Регистрация</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -43,7 +43,7 @@
         </p>
         {% endfor %}
         </p>
-        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+        <p class="submit-button d">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
         {{message}}
     </form>
     {% endblock %}
