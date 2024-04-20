@@ -5,6 +5,8 @@ from data import db_session
 from forms.register import RegisterForm
 from data.users import User
 from forms.user import LoginForm
+from forms.order import OrderForm
+from forms.review import ReviewForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -65,6 +67,12 @@ def login():
         return render_template('login.html', message="Неправильный логин или пароль", form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+
+
+@app.route('/order', methods=['GET', 'POST'])
+def order():
+    form = OrderForm
+    return render_template('order.html', title='формление заказа', form=form)
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
