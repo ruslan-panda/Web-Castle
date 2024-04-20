@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300..700&display=swap');
 
-p, h1, h2, h3, h4, a {
+p, h1, h2, h3, h4, h5, a {
     font-family: "Space Grotesk", sans-serif;
     margin: 0;
 
@@ -242,4 +242,76 @@ gap: 20px;
 }
 .two {
 margin-top: 200px;
+}
+h4 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #ACB2BD;
+}
+h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 599;
+    font-size: 44px;
+    font-style: normal;
+    color: #343F52;
+    line-height: 130%;
+}
+.name-section {
+    display:flex;
+    flex-direction:column;
+    gap: 5px;
+}
+.card {
+    padding: 40px;
+    display:flex;
+    flex-direction: row;
+    box-shadow: 10px 5px 50px rgba(0,0,0, 0.1);
+    border-radius: 10px;
+    min-width: 510px;
+    height: 120px;
+    align-items: center;
+    justify-content: space-between;
+}
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 50px;
+}
+.floor {
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+}
+.icon {
+height:100px;
+}
+
+.about {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.about p {
+    width: 360px;
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: Regular;
+    font-size: 18px;
+    font-style: normal;
+    color: #687183;
+    line-height: 130%;
+}
+h5 {
+font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 599;
+    font-size: 22px;
+    font-style: normal;
+    color: #343F52;
+    line-height: 130%;
 }
