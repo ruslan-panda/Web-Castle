@@ -94,10 +94,20 @@ def review():
         review = Review(
             text=form.text.data,
             grade=form.grade.data,
+            order_id=2
         )
         db_sess.add(review)
         db_sess.commit()
+        return redirect("/index")
     return render_template("review.html", title="", form=form)
+
+@app.route("/test")
+def test():
+    db_sess = db_session.create_session()
+    jobs = db_sess.query(Order).all()
+    users = db_sess.query(User).all()
+    names = {name.id: name.login for name in users}
+    return render_template("all_order.html", jobs=jobs, names=names, title='Работы')
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
