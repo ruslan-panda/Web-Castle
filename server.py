@@ -12,7 +12,7 @@ from data.reviews import Review
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-#api = Api(app)
+# api = Api(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -23,15 +23,18 @@ def logout():
     logout_user()
     return redirect("/")
 
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
+
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html')
+
 
 @app.route('/form_sample', methods=['GET', 'POST'])
 def form_sample():
@@ -47,6 +50,7 @@ def form_sample():
         user = User(
             login=form.login.data,
             email=form.email.data,
+            position=form.position.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)
@@ -66,7 +70,6 @@ def login():
             return redirect("/index")
         return render_template('login.html', message="Неправильный логин или пароль", form=form)
     return render_template('login.html', title='Авторизация', form=form)
-
 
 
 @app.route('/order', methods=['GET', 'POST'])
@@ -101,13 +104,25 @@ def review():
         return redirect("/index")
     return render_template("review.html", title="", form=form)
 
-@app.route("/test")
-def test():
+
+@app.route("/orders")
+def orders():
     db_sess = db_session.create_session()
-    jobs = db_sess.query(Order).all()
+    jobs = db_sess.query(Order).filter(Order.user_id == current_user.id).all()
+    return render_template("all_order.html", jobs=jobs, names=current_user.login, title='Работы')
+
+
+@app.route("/reviews")
+def reviews():
+    db_sess = db_session.create_session()
+    review = db_sess.query(Review).all()
     users = db_sess.query(User).all()
     names = {name.id: name.login for name in users}
-    return render_template("all_order.html", jobs=jobs, names=names, title='Работы')
+    orders = db_sess.query(Order).all()
+    order = {order.id: names[order.user_id] for order in orders}
+
+    return render_template("all_review.html", jobs=review, names=order, title='Отзывы')
+
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
