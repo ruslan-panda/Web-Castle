@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300..700&display=swap');
 
-p, h1, h2, h3, h4, h5, a {
+p, h1, h2, h3, h4, h5, h6, h7, a {
     font-family: "Space Grotesk", sans-serif;
     margin: 0;
 
@@ -260,9 +260,10 @@ h2 {
     line-height: 130%;
 }
 .name-section {
-    display:flex;
+    display: flex;
     flex-direction:column;
     gap: 5px;
+    margin:0 auto;
 }
 .card {
     padding: 40px;
@@ -274,6 +275,12 @@ h2 {
     height: 120px;
     align-items: center;
     justify-content: space-between;
+    transition: all .19s ease-in-out;
+    background: #ffffff;
+}
+.card:hover {
+transform: scale(1.03);
+box-shadow: 10px 5px 50px rgba(0,0,0, 0.15);
 }
 .cards {
     display: flex;
@@ -315,3 +322,65 @@ font-family: "Space Grotesk", sans-serif;
     color: #343F52;
     line-height: 130%;
 }
+.center {
+text-align: center;
+width: 950px;
+}
+.stars {
+display: flex;
+flex-direction: row;
+height: 30px;
+align-items: center;
+gap: 5px;
+}
+.star {
+margin-bottom: 7px;
+}
+h6 {
+font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 599;
+    font-size: 38px;
+    font-style: normal;
+    color: #FCC032;
+    line-height: 130%;
+}
+.elem {
+display: flex;
+flex-direction: column;
+gap: 30px;
+width: 340px;
+height: 310px;
+background: #ffffff;
+padding: 25px;
+box-shadow: 10px 5px 50px rgba(0,0,0, 0.1);
+    border-radius: 10px;
+}
+.elem p {
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: medium;
+    font-size: 18px;
+    font-style: normal;
+    color: #687183;
+    line-height: 160%;
+    max-height: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.status {
+font-size: 16px;
+line-height: 130%;
+}
+.who .fullname {
+    color: #343F52;
+    line-height: 130%;
+}
+.who {
+    margin-top: 20px;
+}
+.elems {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-top: 70px;
