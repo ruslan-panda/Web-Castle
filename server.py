@@ -50,6 +50,7 @@ def form_sample():
         user = User(
             login=form.login.data,
             email=form.email.data,
+            position=form.position.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)
