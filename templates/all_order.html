@@ -1,7 +1,9 @@
+<link href="static/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
 {% block content %}
     <h1>Журнал моих работ</h1>
     {% for job in jobs %}
-        <div>
+        <div class="table-style">
             <table class="table table-success table-striped">
                 <tr>
                     <td width="400px">Название работы</td>
@@ -22,6 +24,7 @@
                     {% endif %}
                 </tr>
             </table>
+            <a class="login-button" href="/review">Сделать отзыв</a>
         </div>
     {% endfor %}
 {% endblock %}
