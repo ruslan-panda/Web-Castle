@@ -89,15 +89,15 @@ def order():
     return render_template('order.html', title='формление заказа', form=form)
 
 
-@app.route('/review', methods=['GET', 'POST'])
-def review():
+@app.route('/review/<int:id>', methods=['GET', 'POST'])
+def review(id):
     form = ReviewForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         review = Review(
             text=form.text.data,
             grade=form.grade.data,
-            order_id=2
+            order_id=id
         )
         db_sess.add(review)
         db_sess.commit()
@@ -109,7 +109,8 @@ def review():
 def orders():
     db_sess = db_session.create_session()
     jobs = db_sess.query(Order).filter(Order.user_id == current_user.id).all()
-    return render_template("all_order.html", jobs=jobs, names=current_user.login, title='Работы')
+    review = db_sess.query(Review).filter(Review.order_id).all()
+    return render_template("all_order.html", jobs=jobs, names=current_user.login, review=review,  title='Работы')
 
 
 @app.route("/reviews")
@@ -120,8 +121,7 @@ def reviews():
     names = {name.id: name.login for name in users}
     orders = db_sess.query(Order).all()
     order = {order.id: names[order.user_id] for order in orders}
-
-    return render_template("all_review.html", jobs=review, names=order, title='Отзывы')
+    return render_template("all_review.html", jobs=review, names=order,  title='Отзывы')
 
 
 # http://127.0.0.1:8080//sample_file_upload

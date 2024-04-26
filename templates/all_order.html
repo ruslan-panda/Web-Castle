@@ -17,14 +17,16 @@
                     <td>{{ names}}</td>
                     <td align="center">{{ job.text }}</td>
                     <td align="center">{{ job.is_paid }} РУБ.</td>
-                    {% if job.is_finished %}
+                    {% if job.if_finished %}
                     <td bgcolor="green" align="center">Закончена</td>
                     {% else %}
                     <td align="center">Не закончена</td>
                     {% endif %}
                 </tr>
             </table>
-            <a class="login-button" href="/review">Сделать отзыв</a>
+            {% if job.if_finished %}
+            <a class="login-button" href="/review/{{ job.id }}"  >Сделать отзыв</a>
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}
