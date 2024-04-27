@@ -1,4 +1,8 @@
+<link href="static/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
 {% block content %}
+<title>Оставить отзыв</title>
+<div class="window two">
 <h1>Оформление заказа</h1>
 <form action="" method="post">
     {{ form.csrf_token }}
@@ -20,7 +24,8 @@
             </p>
         {% endfor %}
     </p>
-    <p>{{ form.post_review(type="submit", class="btn btn-primary") }}</p>
+    <p class="submit-button">{{ form.post_review(type="submit", class="btn btn-primary") }}</p>
     <div>{{ message }}</div>
 </form>
 {% endblock %}
+    </div>

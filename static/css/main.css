@@ -8,6 +8,7 @@ p, h1, h2, h3, h4, h5, h6, h7, a {
 }
 html {
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 .header {
     padding: 14px 310px;
@@ -16,7 +17,16 @@ html {
     justify-content: space-between;
     align-items: center;
 }
-
+.fix {
+position: fixed;
+width: 100%;
+background: #ffffff;
+z-index: 30;
+top: -0px;
+}
+.first {
+margin-top : 100px;
+}
 a {
     text-decoration: none;
     color: #343F52;
@@ -383,7 +393,7 @@ line-height: 130%;
 .elems {
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+gap: 50px;
 margin-top: 70px;
 }
 .table-style {
@@ -391,6 +401,7 @@ display:flex;
 flex-direction: row;
 margin-top: 30px;
 gap: 20px;
+align-items: center;
 }
 td {
 color: #343F52;
@@ -400,4 +411,15 @@ font-family: "Space Grotesk", sans-serif;
     font-size: 16px;
     font-style: normal;
     width: 200px;
+}
+.cent {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.bend {
+margin-top: 40px;
+}
+.second {
+margin-top: -800px;
 }
