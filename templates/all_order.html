@@ -18,15 +18,18 @@
                     <td align="center">{{ job.text }}</td>
                     <td align="center">{{ job.is_paid }} РУБ.</td>
                     {% if job.if_finished %}
-                    <td bgcolor="green" align="center">Закончена</td>
+                    <td align="center">Закончена</td>
                     {% else %}
                     <td align="center">Не закончена</td>
                     {% endif %}
                 </tr>
             </table>
-            {% if job.if_finished %}
+            {% if job.if_finished and job.id not in review%}
             <a class="login-button" href="/review/{{ job.id }}" >Сделать отзыв</a>
             {% endif %}
+            {% if job.id in review %}
+            <td align="center">Вы уже оставили отзыв</td>
+            {% endif%}
         </div>
     {% endfor %}
 {% endblock %}

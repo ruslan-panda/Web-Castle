@@ -110,6 +110,7 @@ def orders():
     db_sess = db_session.create_session()
     jobs = db_sess.query(Order).filter(Order.user_id == current_user.id).all()
     review = db_sess.query(Review).filter(Review.order_id).all()
+    review = [i.order_id for i in review]
     return render_template("all_order.html", jobs=jobs, names=current_user.login, review=review,  title='Работы')
 
 
