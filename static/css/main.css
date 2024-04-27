@@ -90,7 +90,6 @@ a {
 }
 .container {
     padding: 160px 310px;
-
 }
 
 h1 {
@@ -359,7 +358,7 @@ font-family: "Space Grotesk", sans-serif;
 .elem {
 display: flex;
 flex-direction: column;
-gap: 30px;
+justify-content: space-between;
 width: 340px;
 height: 310px;
 background: #ffffff;
@@ -422,4 +421,32 @@ margin-top: 40px;
 }
 .second {
 margin-top: -800px;
+}
+.elements {
+align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 1440px;
+    gap:50px;
+    margin-top: -100px;
+}
+.dix {
+display: flex;
+flex-direction: column;
+gap: 30px;
+}
+.center {
+margin: 0 auto;
+}
+.otz {
+position: fixed;
+top:30px;
+left: 30px;
+}
+.not {
+height: 400px;
+}
+.marg {
+margin-top: 30px;
 }

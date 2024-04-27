@@ -1,23 +1,26 @@
 <link href="static/css/main.css" rel="stylesheet" type="text/css"/>
 <link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
+<title>Отзывы</title>
 {% block content %}
-    <h1>Все отзывы</h1>
-    {% for job in jobs %}
-        <div>
-            <table class="table table-success table-striped">
-                <tr>
-                    <td width="400px">Название работы</td>
-                    <td width="150px">Тот кто написал отзыв</td>
-                    <td width="100px" align="center">Отзыв</td>
-                    <td width="200px" align="center">Оценка</td>
-                </tr>
-                <tr>
-                    <td>{{ job.text.capitalize() }}</td>
-                    <td>{{ names[job.id]}}</td>
-                    <td align="center">{{ job.text }}</td>
-                    <td align="center">{{ job.grade }}</td>
-                </tr>
-            </table>
+<h1 class="center">Все отзывы</h1>
+<div class="container">
+    <div class="elements">
+        {% for job in jobs %}
+        <div class="elem">
+            <div class="dix">
+                <div class="stars">
+                    <h6>{{ job.grade }}</h6>
+                    <img src="static/img/star.png" alt="" class="star">
+                </div>
+                <p>{{ job.text }}</p>
+            </div>
+            <div class="who">
+                <p class="fullname">{{ names[job.id]}}</p>
+                <p class="status">{{ pos[job.id]}}</p>
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+<a class="login-button otz" href="/index#3">Назад</a>
 {% endblock %}
