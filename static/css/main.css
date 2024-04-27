@@ -445,8 +445,13 @@ top:30px;
 left: 30px;
 }
 .not {
-height: 400px;
+height: 410px;
+}
+.eee {
+display: flex;
+flex-direction: column;
+gap: 20px;
 }
 .marg {
-margin-bottom: -30px;
+margin-bottom: 15px;
 }
