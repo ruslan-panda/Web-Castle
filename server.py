@@ -119,10 +119,11 @@ def reviews():
     db_sess = create_session()
     review = db_sess.query(Review).all()
     users = db_sess.query(User).all()
-    names = {name.id: name.login for name in users}
+    names = {name.id: (name.login, name.position) for name in users}
     orders = db_sess.query(Order).all()
-    order = {order.id: names[order.user_id] for order in orders}
-    return render_template("all_review.html", jobs=review, names=order,  title='Отзывы')
+    order = {order.id: names[order.user_id][0] for order in orders}
+    position = {pos.id: names[pos.user_id][1] for pos in orders}
+    return render_template("all_review.html", jobs=review, names=order, pos=position, title='Отзывы')
 
 
 # http://127.0.0.1:8080//sample_file_upload
