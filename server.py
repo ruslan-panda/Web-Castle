@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_restful import Api
-from data import db_session
+from data.db_session import create_session, global_init
 from forms.register_form import RegisterForm
 from data.users import User
 from forms.user_from import LoginForm
@@ -26,7 +26,7 @@ def logout():
 
 @login_manager.user_loader
 def load_user(user_id):
-    db_sess = db_session.create_session()
+    db_sess = create_session()
     return db_sess.query(User).get(user_id)
 
 
@@ -43,7 +43,7 @@ def form_sample():
         if form.password.data != form.password_again.data:
             return render_template('registr.html', title='Регистрация', form=form,
                                    message="Пароли не совпадают")
-        db_sess = db_session.create_session()
+        db_sess = create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('registr.html', title='Регистрация', form=form,
                                    message="Такой пользователь уже есть")
@@ -63,7 +63,7 @@ def form_sample():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
+        db_sess = create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
@@ -76,7 +76,7 @@ def login():
 def order():
     form = OrderForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
+        db_sess = create_session()
         order = Order(
             name_order=form.name_order.data,
             text=form.text.data,
@@ -93,7 +93,7 @@ def order():
 def review(id):
     form = ReviewForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
+        db_sess = create_session()
         review = Review(
             text=form.text.data,
             grade=form.grade.data,
@@ -107,15 +107,16 @@ def review(id):
 
 @app.route("/orders")
 def orders():
-    db_sess = db_session.create_session()
+    db_sess = create_session()
     jobs = db_sess.query(Order).filter(Order.user_id == current_user.id).all()
     review = db_sess.query(Review).filter(Review.order_id).all()
+    review = [i.order_id for i in review]
     return render_template("all_order.html", jobs=jobs, names=current_user.login, review=review,  title='Работы')
 
 
 @app.route("/reviews")
 def reviews():
-    db_sess = db_session.create_session()
+    db_sess = create_session()
     review = db_sess.query(Review).all()
     users = db_sess.query(User).all()
     names = {name.id: name.login for name in users}
@@ -126,5 +127,5 @@ def reviews():
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
-    db_session.global_init("db/jobs.db")
+    global_init("db/jobs.db")
     app.run(port=8080, host='127.0.0.1')
