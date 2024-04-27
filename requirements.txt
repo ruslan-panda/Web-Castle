@@ -2,3 +2,4 @@ SQLAlchemy
 Werkzeug
 Flask
 WTForms
+flask_login
