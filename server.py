@@ -1,10 +1,11 @@
 from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_restful import Api
+import random
 from data.db_session import create_session, global_init
 from forms.register_form import RegisterForm
 from data.users import User
-from forms.user_from import LoginForm
+from forms.login_form import LoginForm
 from forms.order_form import OrderForm
 from forms.review_form import ReviewForm
 from data.orders import Order
@@ -24,6 +25,17 @@ def logout():
     return redirect("/")
 
 
+@app.route("/info_user/<int:id>", methods=['GET', 'POST'])
+def info(id):
+    db_sess = create_session()
+    us = db_sess.query(User).filter(User.id == id).all()
+    user = [{"id": i.id, "login": i.login, "email": i.email, "position": i.position, "invitation_key": i.invitation_key}
+            for i in us]
+    user = user[0]
+    print(user)
+    return render_template("info.html", user=user)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = create_session()
@@ -39,6 +51,10 @@ def index():
 @app.route('/form_sample', methods=['GET', 'POST'])
 def form_sample():
     form = RegisterForm()
+    db_sess = create_session()
+    invitation_key = db_sess.query(User).filter(User.invitation_key).all()
+    ik = [i.invitation_key for i in invitation_key]
+    print(ik)
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
             return render_template('registr.html', title='Регистрация', form=form,
@@ -47,10 +63,24 @@ def form_sample():
         if db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('registr.html', title='Регистрация', form=form,
                                    message="Такой пользователь уже есть")
+        db_sess = create_session()
+        if form.invitation_key.data == "admin":
+            ad = 1
+        elif form.invitation_key.data not in ik:
+            return render_template('registr.html', title='Регистрация', form=form,
+                                   message="Несуществующий код")
+        else:
+            ad = 0
+        chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+        key = str(random.randint(0, 9))
+        for i in range(10):
+            key += random.choice(chars)
         user = User(
             login=form.login.data,
             email=form.email.data,
-            position=form.position.data
+            position=form.position.data,
+            admin=ad,
+            invitation_key=key
         )
         user.set_password(form.password.data)
         db_sess.add(user)
@@ -111,7 +141,7 @@ def orders():
     jobs = db_sess.query(Order).filter(Order.user_id == current_user.id).all()
     review = db_sess.query(Review).filter(Review.order_id).all()
     review = [i.order_id for i in review]
-    return render_template("all_order.html", jobs=jobs, names=current_user.login, review=review,  title='Работы')
+    return render_template("all_order.html", jobs=jobs, names=current_user.login, review=review, title='Работы')
 
 
 @app.route("/reviews")

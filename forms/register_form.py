@@ -9,4 +9,5 @@ class RegisterForm(FlaskForm):
     email = EmailField('Почта', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
+    invitation_key = StringField("Введите пригласитеьный код \n (Не обезательно)", validators=[DataRequired()])
     submit = SubmitField('Зарегистрироваться')

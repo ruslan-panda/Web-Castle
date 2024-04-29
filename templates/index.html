@@ -18,7 +18,7 @@
             <li><a href="/order">Заказать</a></li>
             <li><a href="/orders">Мои заказы</a></li>
         </ul>
-        <a class="navbar-brand" href="/logout">{{ current_user.login }}</a>
+        <a class="navbar-brand" href="/info_user/{{ current_user.id }}">{{ current_user.login }}</a>
         {% else %}
         <ul class="titles">
             <li><a href="#">Главная</a></li>

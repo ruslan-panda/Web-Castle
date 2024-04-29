@@ -1,0 +1,16 @@
+{% block content %}
+<link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
+<title>Вход</title>
+    <div class="window two">
+        <form action="" method="post">
+            {{ user.csrf_token }}
+            <p>
+                имя {{ user.login }}<br>
+                почта {{ user.email }}<br>
+                должность {{ user.position }}<br>
+                пригласительный ключ {{ user.invitation_key }}<br>
+                <a class="navbar-brand" href="/logout">Выйти из аккаунта</a>
+            </p>
+        </form>
+        {% endblock %}
+    </div>
