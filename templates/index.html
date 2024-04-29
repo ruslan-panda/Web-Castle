@@ -10,7 +10,15 @@
 <div class="fix">
     <div class="header">
         <img src="static/img/logo.png"/>
-        {% if current_user.is_authenticated %}
+        {% if current_user.admin %}
+        <ul class="titles">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#2">Услуги</a></li>
+            <li><a href="#3">Отзывы</a></li>
+            <li><a href="/admins">Функции админа</a></li>
+        </ul>
+        <a class="navbar-brand" href="/info_user/{{ current_user.id }}">{{ current_user.login }}</a>
+        {% elif current_user.is_authenticated %}
         <ul class="titles">
             <li><a href="#">Главная</a></li>
             <li><a href="#2">Услуги</a></li>

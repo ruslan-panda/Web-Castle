@@ -1,0 +1,29 @@
+<link href="static/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
+<title>Админка</title>
+{% block content %}
+<h1 class="center">Необработынные заказы</h1>
+<div class="container">
+    <div class="elements">
+        {% for job in jobs %}
+        <div class="elem not">
+            <div class="dix">
+                <p>
+                    {{ job.is_paid }} ₽<br
+                </p>
+                <p>Описание: {{ job.text }}</p>
+            </div>
+            <div class="eee">
+                <div class="who">
+                    <p class="fullname">Название: {{ job.name_order }}</p>
+                    <p class="status">Заказчик: {{ names[job.id] }}</p>
+                    <a class="" href="/admin_edit_order/{{ job.id }}">Оформить заказ</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<a class="login-button otz" href="/index">Назад</a>
+{% endblock %}

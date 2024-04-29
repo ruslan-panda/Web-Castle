@@ -6,6 +6,7 @@ from data.db_session import create_session, global_init
 from forms.register_form import RegisterForm
 from data.users import User
 from forms.login_form import LoginForm
+from forms.admin_form import AdminForm
 from forms.order_form import OrderForm
 from forms.review_form import ReviewForm
 from data.orders import Order
@@ -66,6 +67,8 @@ def form_sample():
         db_sess = create_session()
         if form.invitation_key.data == "admin":
             ad = 1
+        elif form.invitation_key.data == "":
+            ad = 0
         elif form.invitation_key.data not in ik:
             return render_template('registr.html', title='Регистрация', form=form,
                                    message="Несуществующий код")
@@ -155,6 +158,31 @@ def reviews():
     position = {pos.id: names[pos.user_id][1] for pos in orders}
     return render_template("all_review.html", jobs=review, names=order, pos=position, title='Отзывы')
 
+
+@app.route("/admins")
+def admins():
+    db_sess = create_session()
+    jobs = db_sess.query(Order).all()
+    users = db_sess.query(User).all()
+    names = {name.id: (name.login, name.position) for name in users}
+    orders = db_sess.query(Order).all()
+    order = {order.id: names[order.user_id][0] for order in orders}
+    print(jobs)
+    return render_template("admins.html", jobs=jobs, names=order, title='Работы')
+
+@app.route("/admin_edit_order/<int:id_order>", methods=['GET', 'POST'])
+def admin_ed(id_order):
+    form = AdminForm()
+    db_sess = create_session()
+    jobs = db_sess.query(Order).filter(Order.id == id_order).all()
+    users = db_sess.query(User).all()
+    names = {name.id: (name.login, name.position) for name in users}
+    orders = db_sess.query(Order).all()
+    order = {order.id: names[order.user_id][0] for order in orders}
+    if form.validate_on_submit():
+        print(12345)
+        return redirect("/agmins")
+    return render_template("admin_ed.html", jobs=jobs, names=order, form=form)
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
