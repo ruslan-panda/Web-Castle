@@ -1,0 +1,18 @@
+{% block content %}
+<link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
+<title>Вход</title>
+<div class="window two">
+    <form action="" method="post">
+        {% for job in jobs %}
+        <p>
+            Нынешняя Стоимость: {{ job.is_paid }}<br>
+            {{form.paid.label}}<br>
+            {{ form.paid}}<br>
+            {{ form.status.label }}<br>
+            {{ form.status }}<br>
+        <p class="submit-button">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+        </p>
+        {% endfor %}
+    </form>
+    {% endblock %}
+</div>
