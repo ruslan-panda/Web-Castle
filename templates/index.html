@@ -7,48 +7,59 @@
     <title>Web-Castle</title>
 </head>
 <body>
-<div class="header">
-    <img src="static/img/logo.png"/>
-    <ul class="titles">
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Преимущества</a></li>
-        <li><a href="#">Отзывы</a></li>
-        <li><a href="#">Услуги</a></li>
-        <li><a href="#">Статистика</a></li>
-        <li><a href="#">Заказать</a></li>
-    </ul>
-    {% if current_user.is_authenticated %}
-                    <a class="navbar-brand" href="/logout">{{ current_user.login }}</a>
-                {% else %}
-    <div class="buttons">
-        <a class="login-button" href="/login">Вход</a>
-        <a class="register-button" href="/form_sample">Регистрация</a>
-    </div>
-    {% endif %}
-</div>
-x
-    <div class="container s">
-        <div class="left-side">
-            <div class="h1">
-                <h1>Мы <span>быстро</span> создадим вам уникальный сайт за <span>выгодную</span> цену.</h1>
-                <p>Наши специалисты сделают всё, чтобы ваш сайт отличался от остальных сайтов на рынке.</p>
-            </div>
-            <div class="button-side">
-                <a class="more-button" href="#">Подробнее</a>
-                <img src="static/img/wave.png"/>
-            </div>
-
+<div class="fix">
+    <div class="header">
+        <img src="static/img/logo.png"/>
+        {% if current_user.admin %}
+        <ul class="titles">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#2">Услуги</a></li>
+            <li><a href="#3">Отзывы</a></li>
+            <li><a href="/admins">Функции админа</a></li>
+        </ul>
+        <a class="navbar-brand" href="/info_user/{{ current_user.id }}">{{ current_user.login }}</a>
+        {% elif current_user.is_authenticated %}
+        <ul class="titles">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#2">Услуги</a></li>
+            <li><a href="#3">Отзывы</a></li>
+            <li><a href="/order">Заказать</a></li>
+            <li><a href="/orders">Мои заказы</a></li>
+        </ul>
+        <a class="navbar-brand" href="/info_user/{{ current_user.id }}">{{ current_user.login }}</a>
+        {% else %}
+        <ul class="titles">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#2">Услуги</a></li>
+            <li><a href="#3">Отзывы</a></li>
+        </ul>
+        <div class="buttons">
+            <a class="login-button" href="/login">Вход</a>
+            <a class="register-button" href="/form_sample">Регистрация</a>
         </div>
-
+        {% endif %}
     </div>
-    <img class='arrow' src="static/img/arrow.png"/>
-    <img class='tears' src="static/img/tears.png"/>
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D"><img class='rickroll'
-                                                                                     src="static/img/rickroll.png"/></a>
-    <div></div>
-    <img class='photo1' src="static/img/photo1.png"/>
 </div>
-<div class="container">
+<div class="container s first">
+    <div class="left-side">
+        <div class="h1">
+            <h1>Мы <span>быстро</span> создадим вам уникальный сайт за <span>выгодную</span> цену.</h1>
+            <p>Наши специалисты сделают всё, чтобы ваш сайт отличался от остальных сайтов на рынке.</p>
+        </div>
+        <div class="button-side">
+            <a class="more-button" href="#2">Подробнее</a>
+            <img src="static/img/wave.png"/>
+        </div>
+    </div>
+</div>
+<img class='arrow' src="static/img/arrow.png"/>
+<img class='tears' src="static/img/tears.png"/>
+<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D"><img class='rickroll'
+                                                                                 src="static/img/rickroll.png"/></a>
+<div></div>
+<img class='photo1' src="static/img/photo1.png"/>
+</div>
+<div id='2'  class="container second">
     <div class="name-section">
         <h4>ЧТО МЫ ДЕЛАЕМ?</h4>
         <h2>Мы подбираем <span>услуги</span> для <span>удовлетворения</span> потребностей наших заказчиков.</h2>
@@ -56,14 +67,14 @@ x
     <div class="cards">
         <div class="floor">
             <div class="card">
-                <img class="icon" src="static/img/icon1.png" />
+                <img class="icon" src="static/img/icon1.png"/>
                 <div class="about">
                     <h5>Веб-аналитика</h5>
                     <p>Duis mollis gravida commodo id luctus erat porttitor ligula, eget lacinia odio sem aget elit.</p>
                 </div>
             </div>
-             <div class="card">
-                <img class="icon" src="static/img/icon3.png" />
+            <div class="card">
+                <img class="icon" src="static/img/icon3.png"/>
                 <div class="about">
                     <h5>Веб-дизайн</h5>
                     <p>Duis mollis gravida commodo id luctus erat porttitor ligula, eget lacinia odio sem aget elit.</p>
@@ -71,15 +82,15 @@ x
             </div>
         </div>
         <div class="floor">
-             <div class="card">
-                <img class="icon" src="static/img/icon4.png" />
+            <div class="card">
+                <img class="icon" src="static/img/icon4.png"/>
                 <div class="about">
                     <h5>SEO-услуги</h5>
                     <p>Duis mollis gravida commodo id luctus erat porttitor ligula, eget lacinia odio sem aget elit.</p>
                 </div>
             </div>
-             <div class="card">
-                <img class="icon" src="static/img/icon2.png" />
+            <div class="card">
+                <img class="icon" src="static/img/icon2.png"/>
                 <div class="about">
                     <h5>Fullstack-разработка</h5>
                     <p>Duis mollis gravida commodo id luctus erat porttitor ligula, eget lacinia odio sem aget elit.</p>
@@ -88,7 +99,7 @@ x
         </div>
     </div>
 </div>
-<div class="container s">
+<div id='3' class="container s cent">
     <div class="name-section center">
         <h4 class="center">ДОВОЛЬНЫЕ КЛИЕНТЫ</h4>
         <h2 class="center">Вы можете посмотреть, как <span>отзываются</span> о нас заказчики.</h2>
@@ -99,36 +110,39 @@ x
                 <h6>5</h6>
                 <img src="static/img/star.png" alt="" class="star">
             </div>
-            <p>Отличная компания, помогла сделать для меня сайт, разработав уникальный дизайн и выполнив свою работу чётко и быстро. Я и мои знакомые до сих пор в восторге от проделанной вами работы.</p>
+            <p>Отличная компания, помогла сделать для меня сайт, разработав уникальный дизайн и выполнив свою работу
+                чётко и быстро. Я и мои знакомые до сих пор в восторге от проделанной вами работы.</p>
             <div class="who">
                 <p class="fullname">Миха Мастейнов</p>
                 <p class="status">Менеджер компании “CraftBridge”</p>
             </div>
         </div>
-         <div class="elem">
+        <div class="elem">
             <div class="stars">
                 <h6>5</h6>
                 <img src="static/img/star.png" alt="" class="star">
             </div>
-            <p>Отличная компания, помогла сделать для меня сайт, разработав уникальный дизайн и выполнив свою работу чётко и быстро. Я и мои знакомые до сих пор в восторге от проделанной вами работы.</p>
+            <p>Отличная компания, помогла сделать для меня сайт, разработав уникальный дизайн и выполнив свою работу
+                чётко и быстро. Я и мои знакомые до сих пор в восторге от проделанной вами работы.</p>
             <div class="who">
                 <p class="fullname">Миха Мастейнов</p>
                 <p class="status">Менеджер компании “CraftBridge”</p>
             </div>
         </div>
-         <div class="elem">
+        <div class="elem">
             <div class="stars">
                 <h6>4</h6>
                 <img src="static/img/star.png" alt="" class="star">
             </div>
-            <p>Отличная компания, помогла сделать для меня сайт, разработав уникальный дизайн и выполнив свою работу чётко и быстро. Я и мои знакомые до сих пор в восторге от проделанной вами работы.</p>
+            <p>Отличная компания, помогла сделать для меня сайт, разработав уникальный дизайн и выполнив свою работу
+                чётко и быстро. Я и мои знакомые до сих пор в восторге от проделанной вами работы.</p>
             <div class="who">
                 <p class="fullname">Миха Мастейнов</p>
                 <p class="status">Менеджер компании “CraftBridge”</p>
             </div>
         </div>
     </div>
-
+    <a href="/reviews" class="register-button bend">Больше отзывов</a>
 </div>
 </body>
 </html>

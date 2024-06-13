@@ -15,6 +15,8 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     position = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    admin = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    invitation_key = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     orders = orm.relationship("Order", back_populates='user')
 
     def set_password(self, password):

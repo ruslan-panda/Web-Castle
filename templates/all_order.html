@@ -1,27 +1,40 @@
+<link href="static/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
+<title>Мои заказы</title>
 {% block content %}
-    <h1>Журнал моих работ</h1>
-    {% for job in jobs %}
-        <div>
-            <table class="table table-success table-striped">
-                <tr>
-                    <td width="400px">Название работы</td>
-                    <td width="150px">Заказчик</td>
-                    <td width="100px" align="center">Описание</td>
-                    <td width="200px" align="center">Стоимость</td>
-                    <td width="100px" align="center">Закончена?</td>
-                </tr>
-                <tr>
-                    <td>{{ job.name_order.capitalize() }}</td>
-                    <td>{{ names}}</td>
-                    <td align="center">{{ job.text }}</td>
-                    <td align="center">{{ job.is_paid }} РУБ.</td>
-                    {% if job.is_finished %}
-                    <td bgcolor="green" align="center">Закончена</td>
+<h1 class="center">Мои заказы</h1>
+<div class="container">
+    <div class="elements">
+        {% for job in jobs %}
+        <div class="elem not">
+            <div class="dix">
+                <div class="stars">
+                    <h6>{{ job.is_paid }}₽</h6>
+                </div>
+                <p>Описание: {{ job.text }}</p>
+            </div>
+            <div class="eee">
+                <div class="who">
+                    <p class="fullname">Название: {{ job.name_order }}</p>
+                    <p class="status">Заказчик: {{ names }}</p>
+                    {% if job.if_finished %}
+                    <p class="status">Статус: Закончена</p>
                     {% else %}
-                    <td align="center">Не закончена</td>
+                    <p class="status">Статус: Не закончена</p>
                     {% endif %}
-                </tr>
-            </table>
+                </div>
+            <div class="marg">
+                {% if job.if_finished and job.id not in review%}
+                <a class="login-button" href="/review/{{ job.id }}">Сделать отзыв</a>
+                {% endif %}
+                {% if job.id in review %}
+                <p>Вы уже оставили отзыв</p>
+                {% endif%}
+            </div>
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+<a class="login-button otz" href="/index">Назад</a>
 {% endblock %}

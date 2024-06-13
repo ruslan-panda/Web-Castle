@@ -7,5 +7,5 @@ class OrderForm(FlaskForm):
     name_order = StringField('Название заказа', validators=[DataRequired()])
     text = StringField("Описание заказа", validators=[DataRequired()])
     drop_list = ["Веб-аналитика", "Веб-дизайн", "SEO-услуги", "Fullstack-разработка"]
-    teg = SelectField('выберте тег', choices=drop_list, validators=[DataRequired()])
+    teg = SelectField('Выберите вид работы', choices=drop_list, validators=[DataRequired()])
     post_order = SubmitField('Отправить заказ на обработку')

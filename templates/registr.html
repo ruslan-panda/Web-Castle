@@ -51,6 +51,14 @@
             {{ error }}
         </p>
         {% endfor %}
+        <p>
+            {{ form.invitation_key.label }}<br>
+            {{ form.invitation_key(class="form-control") }}<br>
+            {% for error in form.invitation_key.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
         <p class="submit-button d">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
         {{message}}
     </form>

@@ -8,6 +8,7 @@ p, h1, h2, h3, h4, h5, h6, h7, a {
 }
 html {
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 .header {
     padding: 14px 310px;
@@ -16,7 +17,16 @@ html {
     justify-content: space-between;
     align-items: center;
 }
-
+.fix {
+position: fixed;
+width: 100%;
+background: #ffffff;
+z-index: 30;
+top: -0px;
+}
+.first {
+margin-top : 100px;
+}
 a {
     text-decoration: none;
     color: #343F52;
@@ -57,6 +67,7 @@ a {
     color: #605DBA;
     font-weight: 550;
     transition: all .19s ease-in;
+    align-items: center;
 }
 .login-button:hover {
     border: 2px solid #605DBA;
@@ -79,7 +90,6 @@ a {
 }
 .container {
     padding: 160px 310px;
-
 }
 
 h1 {
@@ -348,7 +358,7 @@ font-family: "Space Grotesk", sans-serif;
 .elem {
 display: flex;
 flex-direction: column;
-gap: 30px;
+justify-content: space-between;
 width: 340px;
 height: 310px;
 background: #ffffff;
@@ -382,5 +392,66 @@ line-height: 130%;
 .elems {
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+gap: 50px;
 margin-top: 70px;
+}
+.table-style {
+display:flex;
+flex-direction: row;
+margin-top: 30px;
+gap: 20px;
+align-items: center;
+}
+td {
+color: #343F52;
+font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: medium;
+    font-size: 16px;
+    font-style: normal;
+    width: 200px;
+}
+.cent {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.bend {
+margin-top: 40px;
+}
+.second {
+margin-top: -800px;
+}
+.elements {
+align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 1440px;
+    gap:50px;
+    margin-top: -100px;
+}
+.dix {
+display: flex;
+flex-direction: column;
+gap: 30px;
+}
+.center {
+margin: 0 auto;
+}
+.otz {
+position: fixed;
+top:30px;
+left: 30px;
+}
+.not {
+height: 410px;
+}
+.eee {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+.marg {
+margin-bottom: 15px;
+}
