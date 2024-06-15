@@ -1,6 +1,7 @@
 <link href="static/css/main.css" rel="stylesheet" type="text/css"/>
 <link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
 <title>Админка</title>
+{% if current_user.admin %}
 {% block content %}
 <h1 class="center">Необработынные заказы</h1>
 <div class="container">
@@ -27,3 +28,6 @@
 </div>
 <a class="login-button otz" href="/index">Назад</a>
 {% endblock %}
+{% else %}
+<h1 class="center">У вас нет доступа к данной странице</h1>
+{% endif %}

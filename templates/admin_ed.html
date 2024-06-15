@@ -1,3 +1,4 @@
+{% if current_user.admin %}
 {% block content %}
 <link href="static/img/title_logo.png" rel="shortcut icon" type="image/png">
 <title>Вход</title>
@@ -16,3 +17,6 @@
     </form>
     {% endblock %}
 </div>
+{% else %}
+<h1 class="center">У вас нет доступа к данной странице</h1>
+{% endif %}
