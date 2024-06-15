@@ -9,16 +9,16 @@
         {% for job in jobs %}
         <div class="elem not">
             <div class="dix">
-                <p>
-                    {{ job.is_paid }} ₽<br
-                </p>
+                <h6>
+                    {{ job.is_paid }} ₽<br>
+                </h6>
                 <p>Описание: {{ job.text }}</p>
             </div>
             <div class="eee">
                 <div class="who">
                     <p class="fullname">Название: {{ job.name_order }}</p>
                     <p class="status">Заказчик: {{ names[job.id] }}</p>
-                    <a class="" href="/admin_edit_order/{{ job.id }}">Оформить заказ</a>
+                    <a class="oformyt" href="/admin_edit_order/{{ job.id }}">Оформить заказ</a>
                     </p>
                 </div>
             </div>

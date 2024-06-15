@@ -455,3 +455,27 @@ gap: 20px;
 .marg {
 margin-bottom: 15px;
 }
+.oformyt {
+color: #605DBA;
+font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size:18px;
+    font-style: normal;
+    width: 200px;
+    transition: all .19s ease-in ;
+}
+.oformyt:hover {
+color: #4440B0;
+}
+
+.info-table {
+line-height: 50px;
+color: #343F52;
+font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 22px;
+    font-style: normal;
+    width: 200px;
+}
