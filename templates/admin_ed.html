@@ -5,6 +5,8 @@
 <title>Вход</title>
 <div class="window two">
     <form action="" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
         {% for job in jobs %}
         <p>
             Нынешняя Стоимость: {{ job.is_paid }}<br>
@@ -12,8 +14,7 @@
             {{ form.paid}}<br>
             {{ form.status.label }}<br>
             {{ form.status }}<br>
-        <p class="submit-button">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-        </p>
+        <p class="submit-button d">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
         {% endfor %}
     </form>
     {% endblock %}

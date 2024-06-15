@@ -179,9 +179,9 @@ def admin_ed(id_order):
     names = {name.id: (name.login, name.position) for name in users}
     orders = db_sess.query(Order).all()
     order = {order.id: names[order.user_id][0] for order in orders}
-    if form.validate_on_submit():
-        print(12345)
-        return redirect("/agmins")
+    if request.method == "POST":
+        if form.validate_on_submit():
+            return redirect("/admins")
     return render_template("admin_ed.html", jobs=jobs, names=order, form=form)
 
 # http://127.0.0.1:8080//sample_file_upload
