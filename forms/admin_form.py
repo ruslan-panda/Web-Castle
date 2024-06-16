@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired
 
 
 class AdminForm(FlaskForm):
-    paid = IntegerField("Введите новую сумму")
+    paid = IntegerField("Введите новую сумму", default=1)
     grade_list = ["На обработке", "Закончена", "Не закончена"]
     status = SelectField("Статус готоности", choices=grade_list, validators=[DataRequired()])
     submit = SubmitField("Выставить условия")
