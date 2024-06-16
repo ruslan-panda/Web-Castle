@@ -16,7 +16,7 @@
             {% if current_user.admin %}
             <a class="submit-button" href="/admin_key">Получить админ ключ</a>
             {% endif %}
-            <a class="submit-button" href="/logout">Выйти из аккаунта</a>
+            <a class="submit-button d" href="/logout">Выйти из аккаунта</a>
         </form>
         {% endblock %}
     </div>
@@ -141,5 +141,8 @@ font-family: "Space Grotesk", sans-serif;
     border: 2px solid #605DBA;
     color: white;
     background: #605DBA;
+}
+.d {
+margin-top: 5px;
 }
 </style>
