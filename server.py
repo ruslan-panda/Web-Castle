@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_restful import Api
 import random
+import schedule
+import time
 from data.db_session import create_session, global_init
 from forms.register_form import RegisterForm
 from data.users import User
@@ -17,6 +19,23 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 # api = Api(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+def admin_key():
+    chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    key = "admin-" + (str(random.randint(0, 9)))
+    for i in range(10):
+        key += random.choice(chars)
+    with open('db/admin_key', 'r+') as f:
+        f.truncate(0)
+        f.write(key)
+        f.close()
+    print(34567890)
+
+
+schedule.every(3).seconds.do(admin_key)
+
+
 
 
 @app.route('/logout')
@@ -49,7 +68,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/form_sample', methods=['GET', 'POST'])
+@app.route('/registr', methods=['GET', 'POST'])
 def form_sample():
     form = RegisterForm()
     db_sess = create_session()
@@ -170,6 +189,7 @@ def admins():
     print(jobs)
     return render_template("admins.html", jobs=jobs, names=order, title='Работы')
 
+
 @app.route("/admin_edit_order/<int:id_order>", methods=['GET', 'POST'])
 def admin_ed(id_order):
     form = AdminForm()
@@ -183,6 +203,7 @@ def admin_ed(id_order):
         if form.validate_on_submit():
             return redirect("/admins")
     return render_template("admin_ed.html", jobs=jobs, names=order, form=form)
+
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
