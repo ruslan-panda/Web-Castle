@@ -4,6 +4,7 @@ from flask_restful import Api
 import random
 import schedule
 import time
+import datetime
 from data.db_session import create_session, global_init
 from forms.register_form import RegisterForm
 from data.users import User
@@ -19,21 +20,6 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 # api = Api(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-
-def admin_key():
-    chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-    key = "admin-" + (str(random.randint(0, 9)))
-    for i in range(10):
-        key += random.choice(chars)
-    with open('db/admin_key', 'r+') as f:
-        f.truncate(0)
-        f.write(key)
-        f.close()
-    print(34567890)
-
-
-schedule.every(3).seconds.do(admin_key)
 
 
 
@@ -68,13 +54,15 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/registr', methods=['GET', 'POST'])
+@app.route('/form_sample', methods=['GET', 'POST'])
 def form_sample():
     form = RegisterForm()
     db_sess = create_session()
     invitation_key = db_sess.query(User).filter(User.invitation_key).all()
     ik = [i.invitation_key for i in invitation_key]
     print(ik)
+    with open('db/admin_key', 'r+') as f:
+        k = f.read()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
             return render_template('registr.html', title='Регистрация', form=form,
@@ -84,7 +72,7 @@ def form_sample():
             return render_template('registr.html', title='Регистрация', form=form,
                                    message="Такой пользователь уже есть")
         db_sess = create_session()
-        if form.invitation_key.data == "admin":
+        if form.invitation_key.data == k:
             ad = 1
         elif form.invitation_key.data == "":
             ad = 0
@@ -204,6 +192,17 @@ def admin_ed(id_order):
             return redirect("/admins")
     return render_template("admin_ed.html", jobs=jobs, names=order, form=form)
 
+@app.route("/admin_key", methods=['GET', 'POST'])
+def admin_key():
+    chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    key = "admin-" + (str(random.randint(0, 9)))
+    for i in range(10):
+        key += random.choice(chars)
+    with open('db/admin_key', 'r+') as f:
+        f.truncate(0)
+        f.write(key)
+        f.close()
+    return render_template("admin_key.html", key=key)
 
 # http://127.0.0.1:8080//sample_file_upload
 if __name__ == '__main__':
