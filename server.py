@@ -2,7 +2,6 @@ from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_restful import Api
 import random
-import schedule
 import time
 import datetime
 from data.db_session import create_session, global_init
@@ -38,7 +37,6 @@ def info(id):
     user = [{"id": i.id, "login": i.login, "email": i.email, "position": i.position, "invitation_key": i.invitation_key}
             for i in us]
     user = user[0]
-    print(user)
     return render_template("info.html", user=user)
 
 
@@ -60,7 +58,6 @@ def form_sample():
     db_sess = create_session()
     invitation_key = db_sess.query(User).filter(User.invitation_key).all()
     ik = [i.invitation_key for i in invitation_key]
-    print(ik)
     with open('db/admin_key', 'r+') as f:
         k = f.read()
     if form.validate_on_submit():
@@ -174,7 +171,6 @@ def admins():
     names = {name.id: (name.login, name.position) for name in users}
     orders = db_sess.query(Order).all()
     order = {order.id: names[order.user_id][0] for order in orders}
-    print(jobs)
     return render_template("admins.html", jobs=jobs, names=order, title='Работы')
 
 
@@ -188,8 +184,20 @@ def admin_ed(id_order):
     orders = db_sess.query(Order).all()
     order = {order.id: names[order.user_id][0] for order in orders}
     if request.method == "POST":
+        print(form.status.data)
         if form.validate_on_submit():
+            if form.status.data == "На обработке":
+                a = 1
+            elif form.status.data == "Закончена":
+                a = 2
+            else:
+                a = 0
+            db_sess = create_session()
+            orderr = db_sess.query(Order).filter(Order.id == id_order).update({Order.is_paid: str(form.paid.data)})
+            orderrr = db_sess.query(Order).filter(Order.id == id_order).update({Order.if_finished: a})
+            db_sess.commit()
             return redirect("/admins")
+
     return render_template("admin_ed.html", jobs=jobs, names=order, form=form)
 
 @app.route("/admin_key", methods=['GET', 'POST'])
@@ -208,3 +216,4 @@ def admin_key():
 if __name__ == '__main__':
     global_init("db/jobs.db")
     app.run(port=8080, host='127.0.0.1')
+
