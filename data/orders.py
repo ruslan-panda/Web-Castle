@@ -16,8 +16,7 @@ class Order(SqlAlchemyBase, UserMixin, SerializerMixin):
     text = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     teg = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
-    if_finished = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True, default=False)
+    if_finished = sqlalchemy.Column(sqlalchemy.Integer, nullable=True, default=False)
     is_paid = sqlalchemy.Column(sqlalchemy.String, nullable=True, default=False)
     date = sqlalchemy.Column(sqlalchemy.String, nullable=True, default=datetime.datetime.now)
     user = orm.relationship('User')
-
