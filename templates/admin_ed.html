@@ -8,9 +8,10 @@
         {{ form.hidden_tag() }}
         {{ form.csrf_token }}
         {% for job in jobs %}
-        <p>
+        <p class="text">
             <span>Нынешняя Стоимость: {{ job.is_paid }}<br></span>
-            {{ job.text }}<br>
+            <span class="not">Описание: {{ job.text }}<br></span>
+            --------------------------------------------------------------------<br>
             {{form.paid.label}}<br>
             {{ form.paid}}<br>
             {{ form.status.label }}<br>
@@ -27,7 +28,13 @@
 span {
 font-weight: 500;
 font-size: 24px;
-line-height: 50px;
+line-height: 160%;
+}
+.not {
+line-height: 130%;
+}
+.text {
+width: 500px;
 }
 h1 {
     font-family: "Space Grotesk", sans-serif;
