@@ -10,6 +10,7 @@
         {% for job in jobs %}
         <p>
             <span>Нынешняя Стоимость: {{ job.is_paid }}<br></span>
+            {{ job.text }}<br>
             {{form.paid.label}}<br>
             {{ form.paid}}<br>
             {{ form.status.label }}<br>
