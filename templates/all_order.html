@@ -24,7 +24,7 @@
                     {% endif %}
                 </div>
             <div class="marg">
-                {% if job.if_finished and job.id not in review%}
+                {% if job.if_finished == 2 and job.id not in review%}
                 <a class="login-button" href="/review/{{ job.id }}">Сделать отзыв</a>
                 {% endif %}
                 {% if job.id in review %}
